@@ -1,0 +1,79 @@
+<%- include('partials/header.ejs'); -%>
+
+<section class="movies-list">
+    <div class="container">
+        <div class="movies-list">
+            <% for(let movie of listMovies){%>
+            <div id="movie.<%=movie.id%>" class="movie">
+                <div class="title">
+                    <div class="title-rating">
+                        &#11088; <%= movie.rating %> / 10
+                    </div>
+                    <div class="title-name"><%= movie.name %></div>
+                    <div class="empty"></div>
+                </div>
+                <div class="comment"><%= movie.comment %></div>
+                <!-- THESE ARE THE BUTTENS -->
+                <div class="buttons">
+                    <button onclick="handler('<%=movie.id%>')">EDIT</button>
+                    <form action="/delete" method="post">
+                        <button name="deleteMovieId" value="<%= movie.id %>">
+                            DELETE
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- THIS IS THE EDITING PART -->
+            <div id="movieEdit.<%= movie.id%>" class="hidden">
+                <form class="movie-from" action="/edit" method="post">
+                    <div id="editTitle.<%=movie.id%>" class="tittle">
+                        <input
+                            type="hidden"
+                            name="id"
+                            value="<%= movie.id %>" />
+                        <input
+                            class="edit-rating"
+                            type="text"
+                            name="movieRating"
+                            autocomplete="off"
+                            autofocus="true"
+                            maxlength="2"
+                            value="<%= movie.rating %>" />
+                        <input
+                            class="edit-name"
+                            type="text"
+                            name="movieName"
+                            autocomplete="off"
+                            autofocus="true"
+                            maxlength="50"
+                            value="<%= movie.name %>" />
+                        <div class="empty"></div>
+                    </div>
+                    <div class="comment">
+                        <textarea
+                            class="movie-comment"
+                            type="text"
+                            name="movieComment"
+                            autocomplete="off"
+                            autofocus="true"
+                            rows="3"
+                            cols="50">
+<%= movie.comment %></textarea
+                        >
+                    </div>
+                    <button type="submit" class="edit-button">
+                        Submit Edit
+                    </button>
+                </form>
+            </div>
+            <% } %>
+        </div>
+        <div class="new-container">
+        <a href="/new">
+            <button class="new-button">Add new Movie</button>
+        </a>
+    </div>
+    </div>
+</section>
+
+<%- include('partials/footer.ejs'); -%>

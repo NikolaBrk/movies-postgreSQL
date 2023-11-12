@@ -1,0 +1,38 @@
+<%- include('partials/header.ejs'); -%>
+
+<section class="add-new-section">
+    <div class="container">
+        <div class="add-movie">
+            <form class="movie-from" action="/add" method="post">
+                <input
+                    class="movie-name"
+                    type="text"
+                    name="movieName"
+                    placeholder="Movie name (50 characters)"
+                    autocomplete="off"
+                    autofocus="true"
+                    maxlength="50" />
+                <input
+                    class="movie-rating"
+                    type="text"
+                    name="movieRating"
+                    placeholder="Rating"
+                    autocomplete="off"
+                    autofocus="true"
+                    maxlength="2" />
+                <textarea
+                    class="movie-comment"
+                    type="text"
+                    name="movieComment"
+                    placeholder="Write your comment here (150 characters)"
+                    autocomplete="off"
+                    autofocus="true"
+                    rows="3"
+                    cols="50"></textarea>
+                <button type="submit" name="" class="add-button">Add Entry</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<%- include('partials/footer.ejs'); -%>

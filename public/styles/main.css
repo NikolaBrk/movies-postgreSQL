@@ -1,0 +1,200 @@
+html,
+body {
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffeed9;
+}
+
+.container {
+    align-items: center;
+    display: block;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 65%;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    border: none;
+    background-color: #ffeed96f;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ffeed9;
+}
+
+/* -------------------------- HEADER ------------------------------------- */
+header {
+    background-color: #39a7ff;
+    box-shadow: 2px 2px 2px #000;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    height: 80px;
+}
+
+.header-svg > svg {
+    color: #fff;
+}
+
+/* -------------------------- FOOTER ------------------------------------- */
+
+footer {
+    background-color: #39a7ff;
+}
+
+.footer-content {
+    padding: 30px;
+    height: 200px;
+}
+
+/* -------------------------- MAIN PAGE ------------------------------------- */
+
+/* ---------------- MOVIES LIST ---------------------- */
+
+.movies-list {
+    width: 100%;
+    margin: 100px 0px;
+}
+
+.movie {
+    margin: 50px 0px;
+    padding: 25px;
+    background-color: #87c4ff;
+    border: 5px solid #e0f4ff;
+}
+
+.title {
+    padding: 20px 0px 50px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.title-rating {
+    display: block;
+    width: 100px;
+}
+
+.title-name {
+    width: 200px;
+}
+
+.empty {
+    width: 100px;
+}
+
+.comment {
+    text-align: center;
+    padding: 0px 0px 50px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.new-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.new-button {
+    height: 60px;
+    width: 120px;
+    border-radius: 10px;
+    margin: auto;
+    background-color: #39a7ff;
+}
+
+.new-button:hover {
+    background-color: #39a6ff76;
+}
+
+/* ---------------- MOVIE EDIT FORMS ---------------------- */
+
+.tittle {
+    padding: 20px 0px 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-rating {
+    margin: 20px;
+    padding: 5px;
+    display: block;
+    width: 50px;
+}
+
+.edit-name {
+    margin: 20px;
+    padding: 5px;
+    width: 200px;
+}
+
+.edit-button {
+    margin: auto;
+    width: 100px;
+}
+
+.movie-comment {
+    height: 250px;
+    width: 50%;
+}
+
+/* -------------------------- ADD NEW PAGE ------------------------------------- */
+
+/* ---------------- ADD FROM ---------------------- */
+
+.add-movie {
+    display: block;
+    width: 100%;
+    margin: 250px 0px;
+}
+
+.movie-from {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    padding: 25px;
+    background-color: #87c4ff;
+    border: 5px solid #e0f4ff;
+}
+
+input {
+    padding: 5px;
+    margin: 20px 5px;
+}
+
+textarea {
+    padding: 5px;
+    margin: 20px 5px;
+}
+
+.movie-name {
+    width: 300px;
+}
+
+.movie-rating {
+    width: 50px;
+}
+
+.movie-comment {
+    height: 50px;
+}
+
+.add-button {
+    margin: auto;
+    width: 100px;
+}
