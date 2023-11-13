@@ -17,11 +17,18 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+let sortingBy = "id";
+let sortingOrder = "ASC";
+
 // Function to retrieve the items from the database
 async function retrieveMovies() {
-    const result = await db.query(
-        "SELECT * FROM watched_movies ORDER BY id ASC;"
-    );
+    const querryString =
+        "SELECT * FROM watched_movies ORDER BY " +
+        sortingBy +
+        " " +
+        sortingOrder +
+        ";";
+    const result = await db.query(querryString);
     return result.rows;
 }
 
@@ -33,9 +40,16 @@ app.get("/", async (req, res) => {
     });
 });
 
-// GET REQUEST
-app.get("/new", async (req, res) => {
-    res.render("new.ejs");
+// SORT FUNCTION
+app.post("/sort", async (req, res) => {
+    sortingBy = req.body.sortMovieByType;
+    res.redirect("/");
+});
+
+// SORT FUNCTION FOR ORDER
+app.post("/sort-order", async (req, res) => {
+    sortingOrder = req.body.sortMovieByOrder;
+    res.redirect("/");
 });
 
 // ADD FUNCTION
@@ -76,6 +90,9 @@ app.post("/edit", async (req, res) => {
         console.log(err);
     }
 });
+
+// SORTING FUNCTIOn
+// app.post("/sort", async (req, res) => {});
 
 // DELETE FUNCTION
 app.post("/delete", async (req, res) => {

@@ -2,6 +2,36 @@
 
 <section class="movies-list">
     <div class="container">
+        <div class="sorting-buttons">
+            <form action="/sort" method="post" class="sort-form">
+                <button
+                    name="sortMovieByType"
+                    value="id"
+                    class="sorting-button">
+                    SORT BY ID
+                </button>
+                <button
+                    name="sortMovieByType"
+                    value="rating"
+                    class="sorting-button">
+                    SORT BY RATING
+                </button>
+            </form>
+            <form action="/sort-order" method="post" class="sort-form">
+                <button
+                    name="sortMovieByOrder"
+                    value="ASC"
+                    class="sorting-button">
+                    ASC
+                </button>
+                <button
+                    name="sortMovieByOrder"
+                    value="DESC"
+                    class="sorting-button">
+                    DESC
+                </button>
+            </form>
+        </div>
         <div class="movies-list">
             <% for(let movie of listMovies){%>
             <div id="movie.<%=movie.id%>" class="movie">
@@ -69,10 +99,10 @@
             <% } %>
         </div>
         <div class="new-container">
-        <a href="/new">
-            <button class="new-button">Add new Movie</button>
-        </a>
-    </div>
+            <a href="/new">
+                <button class="new-button">Add new Movie</button>
+            </a>
+        </div>
     </div>
 </section>
 
