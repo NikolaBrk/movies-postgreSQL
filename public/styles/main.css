@@ -39,12 +39,31 @@ header {
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding: 20px;
     height: 80px;
 }
 
 .header-svg > svg {
     color: #fff;
+}
+
+.search-name {
+    width: 300px;
+}
+
+.search-button {
+    background-color: transparent;
+    color: #000;
+}
+
+.search-button:hover {
+    background-color: transparent;
+}
+
+.search-button > svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* -------------------------- FOOTER ------------------------------------- */
@@ -61,6 +80,11 @@ footer {
 /* -------------------------- MAIN PAGE ------------------------------------- */
 
 /* ---------------- MOVIES LIST ---------------------- */
+
+.movies-list-section {
+    margin: 150px 0px;
+    min-height: 60vh;
+}
 
 .sorting-buttons {
     display: flex;
@@ -80,7 +104,7 @@ footer {
     background-color: #39a6ff70;
 }
 
-.movies-list {
+.movie-list {
     width: 100%;
     margin: 100px 0px;
 }

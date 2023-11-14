@@ -3,7 +3,7 @@
 <section class="movies-list-section">
     <div class="container">
         <div class="sorting-buttons">
-            <form action="/sort" method="post" class="sort-form">
+            <form action="/search-sort" method="post" class="sort-form">
                 <button
                     name="sortMovieByType"
                     value="id"
@@ -17,7 +17,7 @@
                     SORT BY RATING
                 </button>
             </form>
-            <form action="/sort-order" method="post" class="sort-form">
+            <form action="/search-sort-order" method="post" class="sort-form">
                 <button
                     name="sortMovieByOrder"
                     value="ASC"
@@ -97,11 +97,6 @@
                 </form>
             </div>
             <% } %>
-        </div>
-        <div class="new-container">
-            <a href="/new">
-                <button class="new-button">Add new Movie</button>
-            </a>
         </div>
     </div>
 </section>

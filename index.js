@@ -19,6 +19,7 @@ app.use(express.static("public"));
 
 let sortingBy = "id";
 let sortingOrder = "ASC";
+let searchInput;
 
 // Function to retrieve the items from the database
 async function retrieveMovies() {
@@ -32,7 +33,19 @@ async function retrieveMovies() {
     return result.rows;
 }
 
-// GET REQUEST
+// Function to saerch for all movie names that fit the user search input
+async function searchMovies() {
+    const querrySearchString =
+        "SELECT * FROM watched_movies WHERE LOWER(name) LIKE '%' || $1 || '%' ORDER BY " +
+        sortingBy +
+        " " +
+        sortingOrder +
+        ";";
+    const result = await db.query(querrySearchString, [searchInput]);
+    return result.rows;
+}
+
+// GET REQUEST FOR MAIN PAGE
 app.get("/", async (req, res) => {
     const movies = await retrieveMovies();
     res.render("index.ejs", {
@@ -50,6 +63,36 @@ app.post("/sort", async (req, res) => {
 app.post("/sort-order", async (req, res) => {
     sortingOrder = req.body.sortMovieByOrder;
     res.redirect("/");
+});
+
+// ------------------  SEARCH FUNCTIONS ---------------------
+
+// GET REQUEST FOR SEARCH PAGE
+app.get("/search", async (req, res) => {
+    const movies = await searchMovies();
+    res.render("search.ejs", {
+        listMovies: movies,
+    });
+});
+
+// SEARCH FUNCTION
+app.post("/search-input", async (req, res) => {
+    const input = req.body.movieName;
+    searchInput = input.toLowerCase();
+    console.log(searchInput);
+    res.redirect("/search");
+});
+
+// SEARCH SORT FUNCTION
+app.post("/search-sort", async (req, res) => {
+    sortingBy = req.body.sortMovieByType;
+    res.redirect("/search");
+});
+
+// SEARCH SORT FUNCTION FOR ORDER
+app.post("/search-sort-order", async (req, res) => {
+    sortingOrder = req.body.sortMovieByOrder;
+    res.redirect("/search");
 });
 
 // ADD FUNCTION
@@ -90,9 +133,6 @@ app.post("/edit", async (req, res) => {
         console.log(err);
     }
 });
-
-// SORTING FUNCTIOn
-// app.post("/sort", async (req, res) => {});
 
 // DELETE FUNCTION
 app.post("/delete", async (req, res) => {
