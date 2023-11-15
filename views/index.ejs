@@ -3,6 +3,7 @@
 <section class="movies-list-section">
     <div class="container">
         <div class="sorting-buttons">
+            <!-- SORTING BUTTENS -->
             <form action="/sort" method="post" class="sort-form">
                 <button
                     name="sortMovieByType"
@@ -33,6 +34,7 @@
             </form>
         </div>
         <div class="movie-list">
+            <!-- For each loop to go through all the movies in the array and display them -->
             <% for(let movie of listMovies){%>
             <div id="movie.<%=movie.id%>" class="movie">
                 <div class="title">
@@ -43,7 +45,7 @@
                     <div class="empty"></div>
                 </div>
                 <div class="comment"><%= movie.comment %></div>
-                <!-- THESE ARE THE BUTTENS -->
+                <!-- Edit and delete buttens for each individual movie -->
                 <div class="buttons">
                     <button onclick="handler('<%=movie.id%>')">EDIT</button>
                     <form action="/delete" method="post">
@@ -53,7 +55,7 @@
                     </form>
                 </div>
             </div>
-            <!-- THIS IS THE EDITING PART -->
+            <!-- The editing part for each movie, hidden until the edit butten is pressed -->
             <div id="movieEdit.<%= movie.id%>" class="hidden">
                 <form class="movie-from" action="/edit" method="post">
                     <div id="editTitle.<%=movie.id%>" class="tittle">
@@ -99,6 +101,7 @@
             <% } %>
         </div>
         <div class="new-container">
+            <!-- butten to open the new movie for adding new movies -->
             <a href="/new">
                 <button class="new-button">Add new Movie</button>
             </a>

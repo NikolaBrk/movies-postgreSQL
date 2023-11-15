@@ -17,23 +17,13 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+// Initializing global veriables
 let sortingBy = "id";
 let sortingOrder = "ASC";
-let searchInput;
+let searchInput = "";
 
-// Function to retrieve the items from the database
-async function retrieveMovies() {
-    const querryString =
-        "SELECT * FROM watched_movies ORDER BY " +
-        sortingBy +
-        " " +
-        sortingOrder +
-        ";";
-    const result = await db.query(querryString);
-    return result.rows;
-}
-
-// Function to saerch for all movie names that fit the user search input
+// Function to saerch for all movie names that fit the user search input with the
+// sorting type and order
 async function searchMovies() {
     const querrySearchString =
         "SELECT * FROM watched_movies WHERE LOWER(name) LIKE '%' || $1 || '%' ORDER BY " +
@@ -47,58 +37,39 @@ async function searchMovies() {
 
 // GET REQUEST FOR MAIN PAGE
 app.get("/", async (req, res) => {
-    const movies = await retrieveMovies();
+    const movies = await searchMovies();
+    console.log(movies);
     res.render("index.ejs", {
         listMovies: movies,
     });
 });
 
-// SORT FUNCTION
+app.get("/new", async (req, res) => {
+    res.render("new.ejs");
+});
+
+// Sort function to retrieve the user desired type (between id and rating)
 app.post("/sort", async (req, res) => {
     sortingBy = req.body.sortMovieByType;
     res.redirect("/");
 });
 
-// SORT FUNCTION FOR ORDER
+// Sort function to retrieve the user desired sort order (ascending or descending)
 app.post("/sort-order", async (req, res) => {
     sortingOrder = req.body.sortMovieByOrder;
     res.redirect("/");
 });
 
-// ------------------  SEARCH FUNCTIONS ---------------------
-
-// GET REQUEST FOR SEARCH PAGE
-app.get("/search", async (req, res) => {
-    const movies = await searchMovies();
-    res.render("search.ejs", {
-        listMovies: movies,
-    });
-});
-
-// SEARCH FUNCTION
+// Search function to retrieve the user input from the search bar
 app.post("/search-input", async (req, res) => {
     const input = req.body.movieName;
     searchInput = input.toLowerCase();
-    console.log(searchInput);
-    res.redirect("/search");
-});
-
-// SEARCH SORT FUNCTION
-app.post("/search-sort", async (req, res) => {
-    sortingBy = req.body.sortMovieByType;
-    res.redirect("/search");
-});
-
-// SEARCH SORT FUNCTION FOR ORDER
-app.post("/search-sort-order", async (req, res) => {
-    sortingOrder = req.body.sortMovieByOrder;
-    res.redirect("/search");
+    res.redirect("/");
 });
 
 // ADD FUNCTION
 app.post("/add", async (req, res) => {
     const newEntry = req.body;
-    console.log(newEntry);
 
     try {
         await db.query(
